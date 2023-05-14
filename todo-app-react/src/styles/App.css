@@ -1,0 +1,246 @@
+:root{
+    --background-color: #121f3d;
+    --details: rgb(248, 194, 14);
+    
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui;
+}
+html{
+    font-size: 62.5%;
+}
+
+body{
+    background-color: var(--background-color);
+}
+
+.todo-counter{
+    text-align: center;
+    margin-top: 4rem;
+    font-size: 4rem;
+    color: #fff;
+}
+.completedTodos, .totalTodos{
+    color: var(--details);
+}
+
+.search-container{
+    display: flex;
+    justify-content: center;
+    margin: 5rem 2rem;
+}
+.search-input{
+    width: 40rem;
+    margin: 0 auto;
+    padding: 10px;
+    font-size: 1.6rem;
+    outline: none;
+    border: none;
+}
+
+.todo-list{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+}
+.todo-item{
+    list-style: none;
+    background-color: #fff;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+}
+.todo-description{
+    font-size: 2rem;
+    line-height: 2.4rem;
+    margin: 0 2rem;
+}
+.icon-complete, .icon-delete{
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 36px;
+    width: 36px;
+    font-size: 24px;
+    font-weight: bold;
+    transition: 0.5s all;
+    border-radius: 1rem;
+}
+.task-completed{
+    text-decoration: line-through;
+}
+.icon-complete:hover{
+    background-color: rgb(21, 214, 21);
+    color: #fff;
+}
+.icon-delete:hover{
+    background-color: #f21;
+    color: #fff;
+}
+.icon-completed{
+    background-color: rgb(21, 214, 21);
+    color: #fff;
+}
+
+.create-todo-button{
+    font-size: 4rem;
+    font-weight: bolder;
+    border-radius: 50%;
+    border: none;
+    background-color: rgb(248, 194, 14);
+    color: #fff;
+    width: 6.4rem; 
+    height: 6.4rem;
+    position: fixed;
+    right: 3rem;
+    bottom: 4rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: all 0.5s;
+}
+
+.create-todo-button:hover{
+    transform: rotate(224deg);
+}
+
+
+/* Loader */
+.todo-loader{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 5px 50px rgba(32,35,41,0.15);
+    border-radius: 1rem;
+    padding: .3rem 0;
+    width: 70%;
+       
+}
+.todo-loader-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 4.8rem;
+    width: 4.8rem;
+    border-radius: 50%;
+}
+
+.todo-loader-text{
+    margin: 24px 0 24px 24px;
+    width: calc(100% - 12rem);
+    font-size: 1.8rem;
+    line-height: 20px;
+    font-weight: 400;
+}
+
+.todo-loader, 
+.todo-loader-icon{
+    background: linear-gradient(
+        90deg,
+        rgba(250,250,250,1),
+        rgb(200,199,199)
+    );
+    background-size: 400% 400%;
+    animation: loadingAnimation 3s ease-in-out infinite;
+}
+
+
+/* Modal */
+.modal{
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(
+        90deg,
+        rgba(250,250,250,1),
+        rgb(200,199,199)
+    );
+    /* width: 30%; */
+    margin: 0 auto;
+    z-index: 10;
+}
+.modal h1{
+    font-size: 2.2rem;
+    margin: 1rem;
+}
+.modal input{
+    font-size: 1.5rem;
+    padding: 8px;
+    outline: none;
+    width: 80%;
+}
+.modal button{
+    margin: 1rem;
+    font-size: 1.7rem;
+    padding: 5px;
+    font-weight: bold;
+    background-color: var(--details);
+    border: none;
+    color: #fff;
+}
+.container-modal{
+    display: flex;
+    align-items: center;
+    /* gap: 5rem; */
+}
+
+.close-modal-button{
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 36px;
+    width: 36px;
+    font-size: 24px;
+    font-weight: bold;
+    transition: 0.5s all;
+    border-radius: 1rem;
+}
+.close-modal-button:hover{
+    color: #fff;
+    background-color: #f21;
+}
+
+
+
+/* Media queries */
+@media(min-width: 1024px){
+    .modal{
+        width: 30%;
+    }
+}
+
+@media(max-width: 1024px){
+    .modal{
+        width: 40%;
+    }
+}
+
+@media (max-width: 600px){
+    .modal{
+        width: 70%;
+    }
+}
+
+
+@keyframes loadingAnimation{
+    0%{
+        background-position: 0% 50%;
+    }
+    50%{
+        background-position: 100% 50%;
+    }
+    100%{
+        background-position: 0% 50%;
+    }
+}
