@@ -9,13 +9,6 @@ import TodoLoader from './components/TodoLoader';
 import Modal from './components/Modal';
 
 
-const defaultTodos = [
-  {description: "Cortar cebolla", completed:false},
-  {description: "terminar el curso", completed: false},
-  {description: "hacer la tarea", completed: true},
-  {description: "curso de git y github", completed: true},
-  {description: "curso practico", completed: true},
-]
 
 function App() {
 
@@ -27,7 +20,9 @@ function App() {
       localStorage.setItem('TODOS', [])
     }
 
-  const [todos, setTodos] = useState(parsedTodos);
+  const [todos, setTodos] = useState(
+    ()=> parsedTodos || []
+  );
   const [searchedValue, setSearchedValue] = useState('');
   const [loading, setLoading] = useState(true);
   const [openModal, setOpenModal] = useState(false);
@@ -60,6 +55,15 @@ function App() {
     newTodos.splice(todoIndex,1);
     saveTodos(newTodos);
   }
+
+  const createTodo = (text)=>{
+    const newTodos = [...todos];
+    newTodos.push({
+      description: text,
+      completed: false
+    });
+    saveTodos(newTodos);
+  }
   
 
   const loader = ()=>{
@@ -83,7 +87,14 @@ function App() {
   
         <CreateTodoButton 
         setOpenModal={()=>setOpenModal(true)}
-        /> 
+        />
+
+{openModal && 
+        <Modal 
+        closeModal={()=>setOpenModal(false)}
+        createTodo={createTodo}
+        />} 
+ 
       </>
     )
   }
@@ -103,7 +114,7 @@ function App() {
         <TodoSearch
           setSearchedValue={setSearchedValue}
         />
-        <h1 style={{
+        <h1 className={openModal && 'inactive'} style={{
           color: "#fff",
           textAlign: "center",
           fontSize: "3rem"
@@ -112,8 +123,12 @@ function App() {
         setOpenModal={()=>setOpenModal(true)}
         />
 
-        {openModal && <Modal/>} 
-        </>
+{openModal && 
+        <Modal 
+        closeModal={()=>setOpenModal(false)}
+        createTodo={createTodo}
+        />} 
+    </>
       )
     }
     return (
@@ -146,13 +161,11 @@ function App() {
         setOpenModal={()=>setOpenModal(true)}
         />
 
-
-        {openModal &&(
-          <Modal>
-            <h1>Crea un TODO!</h1>
-            <input type="text" placeholder='Wirite it here...'/>
-          </Modal>
-        )}  
+        {openModal && 
+        <Modal 
+        closeModal={()=>setOpenModal(false)}
+        createTodo={createTodo}
+        />}  
 
       </>
     )
