@@ -13,3 +13,7 @@ I used React Hooks (useState and useEffect), learned about components and elemen
 ## Environment
 
 For this project I used Vite (a tool to develope and compile my production code) and I deployed it with Github Pages.
+
+## Deploy
+
+Demo: https://gianprocopio.github.io/todo-app-react/
